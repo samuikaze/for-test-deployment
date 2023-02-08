@@ -1,0 +1,6 @@
+kubernetes_path = ""
+namespace_name = ""
+app_name = ""
+image_name = ""
+host_port = 4200
+ingress_port = 80

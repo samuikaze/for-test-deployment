@@ -10,3 +10,7 @@ An example project for testing deploy application to Podman or Kubernetes cluste
     - Change variables value into specify value.
     - Issue `terraform init` and `terraform apply --auto-approve` to deploy
     - Done
+2. Using kubectl to deploy application to cluster
+    - Modify `kubernetes/deployment.yaml`.
+    - Issue `kubectl apply -f deployment.yaml`
+    - Done

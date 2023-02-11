@@ -1,0 +1,93 @@
+# Before issuing `kubectl apply` command,
+# modify the value contains "<" and ">" to correct value
+
+# namespace-deploy.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: <NAMESPACE_NAME>
+
+---
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: <APPLICATION_NAME>
+  namespace: <NAMESPACE_NAME>
+  labels:
+    app_name: <APPLICATION_NAME>
+spec:
+  replica: 1
+  selector:
+    matchLabels:
+      app_name: <APPLICATION_NAME>
+  template:
+    metadata:
+      labels:
+        app_name: <APPLICATION_NAME>
+    spec:
+      containers:
+        - name: <APPLICATION_NAME>
+          image: <REGISTRY_DOMAIN>/<IMAGE_NAME>
+          ports:
+            - containerPort: 4200
+              protocol: TCP
+
+---
+# service-deploy.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: <APPLICATION_NAME>
+  namespace: <NAMESPACE_NAME>
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 4200
+  selector:
+    app_name: <APPLICATION_NAME>
+  type: ClusterIP
+
+---
+# ingress-deploy.yaml
+# saberline/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: <APPLICATION_NAME>
+  namespace: <NAMESPACE_NAME>
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/body-size: "102400m"
+    nginx.ingress.kubernetes.io/proxy-body-size: "102400m"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "7200"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "7200"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "7200"
+    nginx.ingress.kubernetes.io/proxy-max-temp-file-size: "0"
+    nginx.ingress.kubernetes.io/proxy-buffering: "off"
+    nginx.ingress.kubernetes.io/proxy_max_temp_file_size: "102400m"
+    nginx.ingress.kubernetes.io/large-client-header-buffers: "8 52m"
+    nginx.ingress.kubernetes.io/client-header-buffer-size: "52m"
+    nginx.ingress.kubernetes.io/client-body-buffer-size: "102400m"
+    nginx.ingress.kubernetes.io/client-max-body-size: "102400m"
+    nginx.ingress.kubernetes.io/client_body_timeout: "7200"
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+    nginx.org/client-max-body-size: "102400m"
+    nginx.org/proxy-read-timeout: "7200"
+    nginx.org/websocket-services: core-service
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /test/(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: <APPLICATION_NAME>
+                port:
+                  number: 80

@@ -1,0 +1,34 @@
+name: Build and run test with the image
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag localhost:5000/for-deploy-test:latest
+    - name: Login to private registry
+      uses: docker/login-action@v2.1.0
+      with:
+        registry: ${{ integration_secret.REGISTRY_URL }}
+        username: ${{ integration_secret.REGISTRY_USERNAME }}
+        password: ${{ integration_secret.REGISTRY_PASSWORD }}
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        context: ./
+        file: ./Dockerfile
+        builder: ${{ steps.buildx.outputs.name }}
+        push: true
+        tags: '${{ integration_secret.REGISTRY_URL }}/{{ env.APP_NAME }}:latest'
+        cache-from: 'type=registry,ref=${{ integration_secret.REGISTRY_URL }}/{{ env.APP_NAME }}:buildcache'
+        cache-to: 'type=registry,ref=${{ integration_secret.REGISTRY_URL }}/{{ env.APP_NAME }}:buildcache,mode=max'

@@ -1,8 +1,10 @@
 name: Build and run test with the image
 
 on:
+  # Allow on main branch has changes.
   push:
     branches: [ "main" ]
+  # Allow on any branch create PR to main branch
   pull_request:
     branches: [ "main" ]
 

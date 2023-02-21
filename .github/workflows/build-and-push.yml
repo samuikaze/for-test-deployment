@@ -16,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{ secrets.REGISTRY_URL }}/{{ env.APP_NAME }}:latest
+      run: docker build . --file Dockerfile --tag ${{ secrets.REGISTRY_URL }}/${{ env.APP_NAME }}:latest
     - name: Login to private registry
       uses: docker/login-action@v2.1.0
       with:
@@ -30,6 +30,6 @@ jobs:
         file: ./Dockerfile
         builder: ${{ steps.buildx.outputs.name }}
         push: true
-        tags: '${{ secrets.REGISTRY_URL }}/{{ env.APP_NAME }}:latest'
-        cache-from: 'type=registry,ref=${{ secrets.REGISTRY_URL }}/{{ env.APP_NAME }}:buildcache'
-        cache-to: 'type=registry,ref=${{ secrets.REGISTRY_URL }}/{{ env.APP_NAME }}:buildcache,mode=max'
+        tags: '${{ secrets.REGISTRY_URL }}/${{ env.APP_NAME }}:latest'
+        cache-from: 'type=registry,ref=${{ secrets.REGISTRY_URL }}/${{ env.APP_NAME }}:buildcache'
+        cache-to: 'type=registry,ref=${{ secrets.REGISTRY_URL }}/${{ env.APP_NAME }}:buildcache,mode=max'

@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag localhost:5000/for-deploy-test:latest
+      run: docker build . --file Dockerfile --tag ${{ integration_secret.REGISTRY_URL }}/for-deploy-test:latest
     - name: Login to private registry
       uses: docker/login-action@v2.1.0
       with:

@@ -31,5 +31,5 @@ jobs:
         builder: ${{ steps.buildx.outputs.name }}
         push: true
         tags: '${{ secrets.REGISTRY_URL }}/${{ vars.APP_NAME }}:latest'
-        cache-from: 'type=registry,ref=${{ secrets.REGISTRY_URL }}/${{ vars.APP_NAME }}:buildcache'
-        cache-to: 'type=registry,ref=${{ secrets.REGISTRY_URL }}/${{ vars.APP_NAME }}:buildcache,mode=max'
+        # cache-from: 'type=registry,ref=${{ secrets.REGISTRY_URL }}/${{ vars.APP_NAME }}:buildcache'
+        # cache-to: 'type=registry,ref=${{ secrets.REGISTRY_URL }}/${{ vars.APP_NAME }}:buildcache,mode=max'

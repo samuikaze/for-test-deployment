@@ -14,3 +14,8 @@ An example project for testing deploy application to Podman or Kubernetes cluste
     - Modify `kubernetes/deployment.yaml`.
     - Issue `kubectl apply -f deployment.yaml`
     - Done
+
+## References
+
+- [How to prevent GitHub Actions workflow being triggered by a forked repository events?](https://stackoverflow.com/a/73146898)
+- [Stop github actions running on a fork](https://github.com/orgs/community/discussions/26704)

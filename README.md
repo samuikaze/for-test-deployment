@@ -23,3 +23,6 @@ An example project for testing deploy application to Podman or Kubernetes cluste
 - [Workflow syntax for GitHub Actions](https://docs.github.com/zh/actions/using-workflows/workflow-syntax-for-github-actions)
 - [使用指令碼在執行器上測試程式碼](https://docs.github.com/zh/actions/examples/using-scripts-to-test-your-code-on-a-runner)
 - [How to use GitHub Actions environment variables](https://snyk.io/blog/how-to-use-github-actions-environment-variables/)
+- [Add option to run containers with podman instead of docker](https://github.com/actions/runner/issues/505#issuecomment-1381485521)
+- [Build a Docker image and push to a private registry with Github Actions 🛠️🚀](https://axellarsson.com/blog/github-actions-build-docker-image-and-push-to-private-registry/)
+- [Interact with podman docker via socket in Redhat 9](https://stackoverflow.com/a/72693093)

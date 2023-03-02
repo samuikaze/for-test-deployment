@@ -26,3 +26,8 @@ An example project for testing deploy application to Podman or Kubernetes cluste
 - [Add option to run containers with podman instead of docker](https://github.com/actions/runner/issues/505#issuecomment-1381485521)
 - [Build a Docker image and push to a private registry with Github Actions 🛠️🚀](https://axellarsson.com/blog/github-actions-build-docker-image-and-push-to-private-registry/)
 - [Interact with podman docker via socket in Redhat 9](https://stackoverflow.com/a/72693093)
+- [Only run job on specific branch with GitHub Actions](https://stackoverflow.com/a/58142412)
+- [Github actions run only on feature branches](https://stackoverflow.com/questions/66714026/github-actions-run-only-on-feature-branches)
+- [GitHub Actions Variables](https://docs.github.com/en/actions/learn-github-actions/variables)
+- [How to access secrets when using flutter web with github actions](https://stackoverflow.com/questions/67964110/how-to-access-secrets-when-using-flutter-web-with-github-actions/67998780#67998780)
+- [Deploy Kubernetes Resources in Minikube cluster using Terraform](https://dev.to/chefgs/deploy-kubernetes-resources-in-minikube-cluster-using-terraform-1p8o#first-things-first)

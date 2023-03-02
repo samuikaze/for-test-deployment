@@ -5,8 +5,8 @@ on:
   push:
     branches: [ "main" ]
   # Allow on any branch create PR to main branch
-  pull_request:
-    branches: [ "main" ]
+  # pull_request:
+  #   branches: [ "main" ]
 
 jobs:
   build:
